@@ -8,6 +8,7 @@ from flask_restful import Api
 from controllers.usuario import UsuariosController,UsuarioController
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint # * Agrega swagger a nuestro proyecto
+from os import environ # ! importamos de os la environ para usar la variable de enterno
 
 
 app = Flask(__name__)
@@ -33,8 +34,9 @@ configuracionSwagger = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config = {
 # ? agrega otra aplicacion, que no sea Flask ,a nuestro proyecto Flask
 app.register_blueprint(configuracionSwagger)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:%s@localhost:5432/directorio' % quote_plus("P@ssw0rd")
+#? app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:%s@localhost:5432/directorio' % quote_plus("P@ssw0rd")
 
 conexion.init_app(app)
 
