@@ -6,9 +6,16 @@ from urllib.parse import quote_plus
 from flask_migrate import Migrate
 from flask_restful import Api
 from controllers.usuario import UsuariosController,UsuarioController
+from controllers.mascota import MascotasController
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint # * Agrega swagger a nuestro proyecto
+from os import environ # ! importamos de os la environ para usar la variable de enterno
+from dotenv import load_dotenv
 
+#load_dotenv tiene que estar en la primera linea de nuestro archivo principal
+#cargara las variables del archivo .env y podra ser utilizadas en todo el proyecto
+
+load_dotenv()
 
 app = Flask(__name__)
 api = Api(app)
@@ -33,8 +40,9 @@ configuracionSwagger = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config = {
 # ? agrega otra aplicacion, que no sea Flask ,a nuestro proyecto Flask
 app.register_blueprint(configuracionSwagger)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:%s@localhost:5432/directorio' % quote_plus("P@ssw0rd")
+#? app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:%s@localhost:5432/directorio' % quote_plus("P@ssw0rd")
 
 conexion.init_app(app)
 
@@ -50,6 +58,7 @@ Migrate(app=app,db=conexion)
 # * Aca agregamos todas las rutas de nuestros controladores
 api.add_resource(UsuariosController, '/usuarios')
 api.add_resource(UsuarioController, '/usuario/<int:id>')
+api.add_resource(MascotasController, '/mascotas')
 
 
 if __name__ == '__main__':
