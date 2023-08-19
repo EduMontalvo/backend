@@ -40,7 +40,11 @@ configuracionSwagger = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config = {
 # ? agrega otra aplicacion, que no sea Flask ,a nuestro proyecto Flask
 app.register_blueprint(configuracionSwagger)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
+""" app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL') """
+
+""" passwordBd = environ.get("DATABASE_URL").split(":")[2].split("@localhost")[0]
+passwordConvertida = quote_plus(passwordBd)
+urlBd = environ.get """
 
 #? app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:%s@localhost:5432/directorio' % quote_plus("P@ssw0rd")
 
