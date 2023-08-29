@@ -57,5 +57,5 @@ class GolosinaModel(models.Model):
         # glacitas 2023/10/09 ✓    en este caso lo permite porque es el primer registro
         # morochas 2023/05/07 ✓    
         # glacitas 2023/10/09 X     en este caso no lo registrara porque ya existe uno igual, tienen que ser diferentes el nombre y la fecha de vencimiento, jamas se podra repetir en un registro el nombre y la fecha de vencimiento. constrain | restriccion
-
+        # nombres de las COLUMNAS no de los atributos
         unique_together = [['nombre', 'fecha_vencimiento']]
