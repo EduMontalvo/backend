@@ -1,0 +1,13 @@
+flask db init > inicializa nuestro proyecto con migraciones
+flask db migrate -m "MENSAJE" > creara la migracion si es que hay con el nombre que le coloquemos
+flask db upgrade > ejecutara las migraciones que aun no estan en la base de datos
+flask db upgrade --sql [VERSION] > mostrara el SQL de esa migracion PERO no efectuara la operacion
+flask db downgrade VERSION >retrocedera a la version que hemos especificado
+
+para instalar todas las librerias que estan en mi archivo
+
+pip install -r librerias.txt
+
+para guardar una nueva lista donde estaran todas mis librerias y si ya existe se actualizara 
+
+pip freeze > requirements.txt
